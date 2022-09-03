@@ -8,7 +8,6 @@ const Login = () => {
 
   return (
     <div>
-      <h1>로고</h1>
       <LoginContainer>
         <label htmlFor="id"></label>
         <LoginInput

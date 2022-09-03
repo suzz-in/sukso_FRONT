@@ -78,7 +78,5 @@ const Stdiv = styled.div`
 margin : 50px;
 border: solid;
 border-radius: 5px;
-&:button {
-    margin : 10px;
-}
+border-color: #87CEEB
 `

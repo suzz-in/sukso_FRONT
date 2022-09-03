@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../components/Main";
-import Detail from "../components/Detail";
-import Login from "../components/Login";
-import Singup from "../components/Singup";
+import LoginPage from "../page/LoginPage"
+import MainPage from "../page/MainPage";
+import SingupPage from "../page/SignupPage";
+import DetailPage from "../page/Detailpage"
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/member/login" element={<Login />} />
-        <Route path="/member/signup" element={<Singup />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/singup" element={<SingupPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/detail" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,7 +4,6 @@ import styled from "styled-components";
 const Singup = () => {
   return (
     <div>
-      <h1>로고</h1>
       <h3>회원가입</h3>
       <LoginContainer>
         <LoginLabel htmlFor="id">아이디 *</LoginLabel>
