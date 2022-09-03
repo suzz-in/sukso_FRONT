@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
-import "./App.css";
+
+import Router from "./shard/GlobalRoute";
 
 function App() {
-  return <div className="App"></div>;
+  return <Router />;
 }
 
 export default App;
