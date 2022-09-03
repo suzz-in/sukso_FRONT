@@ -5,11 +5,6 @@ import { BsTrash, BsPencil } from "react-icons/bs";
 const Comment = () => {
   return (
     <div>
-      <CommentFormStyle>
-        <CommentInputStyle type="text" />
-        <CommentInputStyle type="text" />
-        <AddCommentButtonStyle>추가하기!</AddCommentButtonStyle>
-      </CommentFormStyle>
       <CommentListStyle>
         <span>나나낭 : 도토리수집</span>
         <div>
@@ -28,26 +23,6 @@ const Comment = () => {
 
 export default Comment;
 
-const CommentFormStyle = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-`;
-
-const CommentInputStyle = styled.input`
-  border-radius: 10px;
-  border: 2px solid pink;
-  margin: 20px 5px;
-  padding: 10px;
-`;
-const AddCommentButtonStyle = styled.button`
-  border-radius: 10px;
-  border: 2px solid pink;
-  margin: 20px 5px;
-  padding: 10px;
-  background-color: pink;
-  color: white;
-  font-weight: bold;
-`;
 const CommentListStyle = styled.div`
   display: flex;
   justify-content: space-around;

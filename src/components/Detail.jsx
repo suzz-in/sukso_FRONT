@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import Input from "../elements/Input";
 import Comment from "./Comment";
 
 const Detail = () => {
@@ -22,7 +23,7 @@ const Detail = () => {
           )}
         </HeartContainer>
       </div>
-
+      <Input />
       <Comment />
     </Container>
   );
