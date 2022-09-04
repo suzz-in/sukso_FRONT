@@ -7,8 +7,10 @@ import Comment from "./Comment";
 
 const Detail = () => {
   const [heart, setHeart] = useState(false);
+
   const heartClick = () => {
     setHeart(!heart);
+    // heart ? alert("좋아요 취소") : alert("좋아요 추가!");
   };
   return (
     <Container>
@@ -21,6 +23,7 @@ const Detail = () => {
           ) : (
             <AiOutlineHeart color="red" size="30px" />
           )}
+          <HeartCount>12</HeartCount>
         </HeartContainer>
       </div>
       <Input />
@@ -38,5 +41,11 @@ const Container = styled.div`
 `;
 const HeartContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const HeartCount = styled.span`
+  margin: 0;
+  padding: 0 5px;
 `;

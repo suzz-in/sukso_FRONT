@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BsTrash, BsPencil } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
+import { getComment } from "../redux/slice/commentSlice";
 
 const Comment = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getComment());
+  }, []);
+  const commentList = useSelector((state) => state.comment.comment);
+  console.log(commentList);
   return (
-    <div>
-      <CommentListStyle>
-        <span>나나낭 : 도토리수집</span>
+    <Container>
+      <CommentListContainer>
+        <span>
+          {/* {commentList[0].userName} : {commentList[0].comment} */}
+        </span>
         <div>
           <IconButton>
             <BsPencil size="20" color="white" />
@@ -15,17 +25,22 @@ const Comment = () => {
             <BsTrash size="20" color="white" />
           </IconButton>
         </div>
-      </CommentListStyle>
+      </CommentListContainer>
       <ListLine />
-    </div>
+    </Container>
   );
 };
 
 export default Comment;
 
-const CommentListStyle = styled.div`
+const Container = styled.div`
+  width: 60%;
+  margin: 20px;
+`;
+
+const CommentListContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 

@@ -7,27 +7,25 @@ const Login = () => {
   const [pw, setPW] = useState("");
 
   return (
-    <div>
+    <LoginContainer>
       <h1>로고</h1>
-      <LoginContainer>
-        <label htmlFor="id"></label>
-        <LoginInput
-          onChange={(e) => setId(e.target.value)}
-          id="id"
-          type="text"
-          placeholder="아이디"
-        />
-        <label htmlFor="pw"></label>
-        <LoginInput
-          onChange={(e) => setPW(e.target.value)}
-          pw="pw"
-          type="text"
-          placeholder="비밀번호"
-        />
-        <LoginButton>로그인</LoginButton>
-        <LoginButton>회원가입</LoginButton>
-      </LoginContainer>
-    </div>
+      <label htmlFor="id"></label>
+      <LoginInput
+        onChange={(e) => setId(e.target.value)}
+        id="id"
+        type="text"
+        placeholder="아이디"
+      />
+      <label htmlFor="pw"></label>
+      <LoginInput
+        onChange={(e) => setPW(e.target.value)}
+        pw="pw"
+        type="text"
+        placeholder="비밀번호"
+      />
+      <LoginButton>로그인</LoginButton>
+      <LoginButton>회원가입</LoginButton>
+    </LoginContainer>
   );
 };
 export default Login;

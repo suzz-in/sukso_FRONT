@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 const Input = () => {
+  const userName = useRef(null);
+  const comment = useRef(null);
+
+  const data = {
+    id: uuidv4,
+    userName: userName.current,
+    comment: comment.current,
+  };
+
+  const AddCommentButton = () => {
+    console.log(data);
+
+    userName.current.value = "";
+    comment.current.value = "";
+  };
+
   return (
     <CommentFormStyle>
-      <CommentInputStyle type="text" />
-      <CommentInputStyle type="text" />
-      <AddCommentButtonStyle>추가하기!</AddCommentButtonStyle>
+      <CommentInputStyle type="text" ref={userName} />
+      <CommentInputStyle type="text" ref={comment} />
+      <AddCommentButtonStyle onClick={AddCommentButton}>
+        추가하기!
+      </AddCommentButtonStyle>
     </CommentFormStyle>
   );
 };
@@ -15,6 +35,7 @@ export default Input;
 const CommentFormStyle = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
+  width: 60%;
 `;
 
 const CommentInputStyle = styled.input`
