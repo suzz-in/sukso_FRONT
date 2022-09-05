@@ -1,30 +1,78 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [pw, setPW] = useState("");
+//   const [navigates, Setnavigates] = useState(false);
+  const navigate = useNavigate();
+
+
+  const onChange1= (e) => {
+    setId(e.target.value)
+  }
+
+  const onChange2 = (e) => {
+    setPW(e.target.value)
+  }
+
+  const sendRequestLogin = async (e) => {
+    e.preventDefault();
+    let reg1 = /^[A-Za-z0-9]{5,12}$/;
+    let reg2 = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$/;
+    if( id === "" || pw === ""){
+        alert("아이디와 비밀번호를 정확히 입력해주세요")
+    }
+    if (!reg1.test(id)){
+        alert("아이디는 영문 대소문자와 숫자 5~12자리로 입력해야 합니다.")
+    }
+    if (!reg2.test(pw)){
+        alert("비밀번호는 최소 특수문자 하나, 숫자 하나를 포함하여 대소문자와 숫자로 8~20자리를 입력해야 합니다.")
+    }
+    try{
+        const response = await axios.post("login", {
+            id:id,
+            password:pw,
+        }, {withCredentials:true}) //수동으로 CORS 요청에 쿠기값 넣어줌
+       localStorage.setItem("Authorization",response.data.data.Authorization)
+       navigate("/")
+    } catch(error) {
+        alert("아이디와 비밀번호를 확인해주세요.")
+
+        console.log(error)
+    }
+  }
+  useEffect(()=>{
+    if(localStorage.getItem("Authorization") !==null){
+        return navigate("/")
+    }
+  },[])
 
   return (
     <div>
       <LoginContainer>
         <label htmlFor="id"></label>
         <LoginInput
-          onChange={(e) => setId(e.target.value)}
-          id="id"
+          value={id}
+          onChange={onChange1}
           type="text"
           placeholder="아이디"
+          pattern='^[A-Za-z0-9]{5,12}$'
         />
         <label htmlFor="pw"></label>
         <LoginInput
-          onChange={(e) => setPW(e.target.value)}
-          pw="pw"
+          value={pw}
+          onChange={onChange2}
           type="text"
           placeholder="비밀번호"
+          pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$`}
         />
-        <LoginButton>로그인</LoginButton>
-        <LoginButton>회원가입</LoginButton>
+        <a href='/'><LoginButton type="submit" onClick={sendRequestLogin} >로그인</LoginButton></a>
+        <a href='/signup'><LoginButton >회원가입</LoginButton></a>
       </LoginContainer>
     </div>
   );
