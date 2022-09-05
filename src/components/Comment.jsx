@@ -94,9 +94,10 @@ const Comment = () => {
 export default Comment;
 
 const Container = styled.div`
+  border-radius: 10px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 `;
 
 const CommentListContainer = styled.div`

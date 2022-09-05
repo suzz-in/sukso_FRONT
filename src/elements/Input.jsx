@@ -24,19 +24,22 @@ const Input = () => {
 
   return (
     <CommentFormStyle>
-      <CommentInputStyle type="text" ref={comment} />
-      <AddCommentButtonStyle onClick={AddComment}>
-        추가하기!
-      </AddCommentButtonStyle>
+      <div>
+        <CommentInputStyle type="text" ref={comment} />
+        <AddCommentButtonStyle onClick={AddComment}>
+          추가하기!
+        </AddCommentButtonStyle>
+      </div>
     </CommentFormStyle>
   );
 };
 export default Input;
 
 const CommentFormStyle = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  width: 60%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const CommentInputStyle = styled.input`

@@ -4,10 +4,12 @@ import Main from "../components/Main";
 import Detail from "../components/Detail";
 import Login from "../components/Login";
 import Singup from "../components/Singup";
+import Header from "../components/Header";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/singup" element={<Singup />} />
