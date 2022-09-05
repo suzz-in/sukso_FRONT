@@ -1,30 +1,31 @@
 import React, { useRef } from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { addComment } from "../redux/slice/commentSlice";
+import { useDispatch } from "react-redux";
 
 const Input = () => {
-  const userName = useRef(null);
   const comment = useRef(null);
+  const dispatch = useDispatch();
 
-  const data = {
-    id: uuidv4,
-    userName: userName.current,
-    comment: comment.current,
-  };
-
-  const AddCommentButton = () => {
-    console.log(data);
-
-    userName.current.value = "";
-    comment.current.value = "";
+  // 댓글 추가
+  const AddComment = () => {
+    const data = {
+      id: uuidv4(),
+      comment: comment.current.value,
+    };
+    if (comment.current.value < 1) {
+      alert("내용을 입력해 주세요");
+    } else {
+      dispatch(addComment(data));
+      comment.current.value = " ";
+    }
   };
 
   return (
     <CommentFormStyle>
-      <CommentInputStyle type="text" ref={userName} />
       <CommentInputStyle type="text" ref={comment} />
-      <AddCommentButtonStyle onClick={AddCommentButton}>
+      <AddCommentButtonStyle onClick={AddComment}>
         추가하기!
       </AddCommentButtonStyle>
     </CommentFormStyle>
@@ -34,7 +35,7 @@ export default Input;
 
 const CommentFormStyle = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   width: 60%;
 `;
 

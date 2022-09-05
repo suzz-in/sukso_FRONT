@@ -1,14 +1,21 @@
 {
-    "comment": [
-        {
-            "id": 0,
-            "userName": "동그라미",
-            "comment": "우 to the 영 to the 우!"
-        },
-        {
-            "id": 1,
-            "userName": "우영우",
-            "comment": "동 to the 그 to the 라미!"
-        }
-    ]
+  "comment": [
+    {
+      "id": "80ebf6cb-623e-4fa9-b1ed-faa15a7708a9",
+      "comment": "ㄷㄷㅎㄷㅎㄷㅎㄶ"
+    },
+    {
+      "id": "75fd5339-cc25-4249-80c3-000c1cb18894",
+      "comment": "다다"
+    },
+    {
+      "id": "97edd228-4705-4b1f-8f04-be5c4a9a7020",
+      "comment": "ㅎㅎㅎ호호"
+    }
+  ],
+  "likeList": {
+    "contentId": "0",
+    "count": 0,
+    "liked": false
+  }
 }
