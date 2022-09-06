@@ -81,7 +81,7 @@ const Login = () => {
         <LoginInput
           value={password}
           onChange={onChange2}
-          type="text"
+          type="password"
           placeholder="비밀번호"
           pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$`}
         />
