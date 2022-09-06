@@ -4,7 +4,7 @@ import styled from "styled-components";
 function Header() {
     return (
         <Headerdiv>
-            Room-ate
+            Room-ate 변경필
         </Headerdiv>
     )
 }
