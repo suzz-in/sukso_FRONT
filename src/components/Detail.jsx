@@ -12,7 +12,6 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getLikeCount());
-    console.log(dispatch(getLikeCount()));
   }, []);
 
   const heartClick = () => {
