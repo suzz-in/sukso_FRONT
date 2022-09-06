@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-//   const [navigates, Setnavigates] = useState(false);
+  const [submited, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
 
@@ -42,6 +42,8 @@ const Login = () => {
             password:password,
         }, {withCredentials:true}) //수동으로 CORS 요청에 쿠기값 넣어줌
        localStorage.setItem("Authorization",response.data.data.Authorization)
+       localStorage.setItem("Refresh-Token",response.data.data["Refresh-Token"])
+       setSubmitted(true);
        navigate("/")
     } catch(error) {
         alert("아이디와 비밀번호를 확인해주세요.")
