@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "../page/LoginPage"
+import LoginPage from "../page/LoginPage";
 import MainPage from "../page/MainPage";
 import SingupPage from "../page/SignupPage";
-import DetailPage from "../page/Detailpage"
+import DetailPage from "../page/Detailpage";
 
 const Router = () => {
   return (
@@ -19,4 +19,3 @@ const Router = () => {
 };
 
 export default Router;
-

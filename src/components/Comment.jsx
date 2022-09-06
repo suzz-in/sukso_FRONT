@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getComment,
+  getCommentList,
   deleteComment,
   updateComment,
 } from "../redux/slice/commentSlice";
@@ -14,7 +14,7 @@ const Comment = () => {
 
   // 처음 렌더시 한번 실행(thunk 호출하여 서버에서 데이터 가져옴 )
   useEffect(() => {
-    dispatch(getComment());
+    dispatch(getCommentList());
   }, []);
 
   const commentList = useSelector((state) => state.comment.comment);
@@ -22,7 +22,7 @@ const Comment = () => {
   // 삭제
   const DeleteComment = (id) => {
     dispatch(deleteComment(id));
-    dispatch(getComment());
+    dispatch(getCommentList());
     console.log(id);
   };
 
@@ -38,7 +38,7 @@ const Comment = () => {
   // 수정
   const UpdateComment = (data) => {
     dispatch(updateComment(data));
-    dispatch(getComment());
+    dispatch(getCommentList());
     setUpdateInput(false);
   };
 

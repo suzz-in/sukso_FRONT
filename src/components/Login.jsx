@@ -12,50 +12,59 @@ const Login = () => {
   const [submited, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
-
-  const onChange1= (e) => {
-    setId(e.target.value)
-  }
+  const onChange1 = (e) => {
+    setId(e.target.value);
+  };
 
   const onChange2 = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const sendRequestLogin = async (e) => {
     e.preventDefault();
     let reg1 = /^[A-Za-z0-9]{5,12}$/;
     //대문자,소문자,0-9까지 5자리에서 12자리
-    let reg2 = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$/;
+    let reg2 =
+      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$/;
     //최소8자 이상, 20자 이하  영 대문자, 영 소문자, 숫자, 특수문자 각각 최소 1개 이상
-    if( id === "" || password === ""){
-        alert("아이디와 비밀번호를 정확히 입력해주세요")
+    if (id === "" || password === "") {
+      alert("아이디와 비밀번호를 정확히 입력해주세요");
     }
-    if (!reg1.test(id)){
-        alert("아이디는 영문 대소문자와 숫자 5~12자리로 입력해야 합니다.")
+    if (!reg1.test(id)) {
+      alert("아이디는 영문 대소문자와 숫자 5~12자리로 입력해야 합니다.");
     }
-    if (!reg2.test(password)){
-        alert("비밀번호는 최소 특수문자 하나, 숫자 하나를 포함하여 대소문자와 숫자로 8~20자리를 입력해야 합니다.")
+    if (!reg2.test(password)) {
+      alert(
+        "비밀번호는 최소 특수문자 하나, 숫자 하나를 포함하여 대소문자와 숫자로 8~20자리를 입력해야 합니다."
+      );
     }
-    try{
-        const response = await axios.post("login", {
-            id:id,
-            password:password,
-        }, {withCredentials:true}) //수동으로 CORS 요청에 쿠기값 넣어줌
-       localStorage.setItem("Authorization",response.data.data.Authorization)
-       localStorage.setItem("Refresh-Token",response.data.data["Refresh-Token"])
-       setSubmitted(true);
-       navigate("/")
-    } catch(error) {
-        alert("아이디와 비밀번호를 확인해주세요.")
+    try {
+      const response = await axios.post(
+        "login",
+        {
+          id: id,
+          password: password,
+        },
+        { withCredentials: true }
+      ); //수동으로 CORS 요청에 쿠기값 넣어줌
+      localStorage.setItem("Authorization", response.data.data.Authorization);
+      localStorage.setItem(
+        "Refresh-Token",
+        response.data.data["Refresh-Token"]
+      );
+      setSubmitted(true);
+      navigate("/");
+    } catch (error) {
+      alert("아이디와 비밀번호를 확인해주세요.");
 
-        console.log(error)
+      console.log(error);
     }
-  }
-  useEffect(()=>{
-    if(localStorage.getItem("Authorization") !==null){
-        return navigate("/")
+  };
+  useEffect(() => {
+    if (localStorage.getItem("Authorization") !== null) {
+      return navigate("/");
     }
-  },[])
+  }, []);
 
   return (
     <div>
@@ -66,7 +75,7 @@ const Login = () => {
           onChange={onChange1}
           type="text"
           placeholder="아이디"
-          pattern='^[A-Za-z0-9]{5,12}$'
+          pattern="^[A-Za-z0-9]{5,12}$"
         />
         <label htmlFor="pw"></label>
         <LoginInput
@@ -76,8 +85,12 @@ const Login = () => {
           placeholder="비밀번호"
           pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$`}
         />
-        <LoginButton type="submit" onClick={sendRequestLogin} >로그인</LoginButton>
-        <Link to='/signup'><LoginButton >회원가입</LoginButton></Link>
+        <LoginButton type="submit" onClick={sendRequestLogin}>
+          로그인
+        </LoginButton>
+        <Link to="/signup">
+          <LoginButton>회원가입</LoginButton>
+        </Link>
       </LoginContainer>
     </div>
   );
