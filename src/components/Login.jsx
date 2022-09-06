@@ -88,9 +88,9 @@ const Login = () => {
         <LoginButton type="submit" onClick={sendRequestLogin}>
           로그인
         </LoginButton>
-        <Link to="/signup">
-          <LoginButton>회원가입</LoginButton>
-        </Link>
+        
+          <LoginButton><Link to="/signup">회원가입</Link></LoginButton>
+        
       </LoginContainer>
     </div>
   );
