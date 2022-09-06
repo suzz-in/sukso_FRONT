@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { addComment } from "../redux/slice/commentSlice";
+import { addCommentList } from "../redux/slice/commentSlice";
 import { useDispatch } from "react-redux";
 
 const Input = () => {
@@ -17,7 +17,7 @@ const Input = () => {
     if (comment.current.value < 1) {
       alert("내용을 입력해 주세요");
     } else {
-      dispatch(addComment(data));
+      dispatch(addCommentList(data));
       comment.current.value = " ";
     }
   };

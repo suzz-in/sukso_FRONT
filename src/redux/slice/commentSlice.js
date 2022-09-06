@@ -1,21 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getPost = createAsyncThunk;
-
-export const getComment = createAsyncThunk("get/comment", async () => {
-  const { data } = await axios.get("http://localhost:3001/comment");
+export const getCommentList = createAsyncThunk("get/commentList", async () => {
+  const { data } = await axios.get("http://localhost:3001/commentList");
   return data;
 });
 
-export const addComment = createAsyncThunk(
-  "add/comment",
+export const addCommentList = createAsyncThunk(
+  "add/commentList",
   async (newComment) => {
-    const reponse = await axios.post(
+    const { data } = await axios.post(
       "http://localhost:3001/comment",
       newComment
     );
-    return reponse.data;
+    return data;
   }
 );
 
@@ -57,10 +55,10 @@ const commentSlice = createSlice({
     // },
   },
   extraReducers: (builder) => {
-    builder.addCase(getComment.fulfilled, (state, action) => {
+    builder.addCase(getCommentList.fulfilled, (state, action) => {
       state.comment = action.payload;
     });
-    builder.addCase(addComment.fulfilled, (state, action) => {
+    builder.addCase(addCommentList.fulfilled, (state, action) => {
       state.comment.push(action.payload);
     });
   },

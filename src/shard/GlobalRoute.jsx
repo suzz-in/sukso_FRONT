@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../components/Main";
 import Detail from "../components/Detail";
 import Login from "../components/Login";
-import Singup from "../components/Singup";
+import Signup from "../components/Singup";
 import Header from "../components/Header";
 
 const Router = () => {
@@ -12,9 +12,9 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/singup" element={<Singup />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/main" element={<Main />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/detail" element={<Detail />} />
       </Routes>
     </BrowserRouter>
   );
