@@ -1,9 +1,7 @@
-import "./App.css";
-import Main from "./components/Main";
-import Header from "./components/Header";
+import Router from "./shard/GlobalRoute";
 
 function App() {
-  return <div className="App"></div>;
+  return <Router />;
 }
 
 export default App;
