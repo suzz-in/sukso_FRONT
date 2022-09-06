@@ -63,7 +63,7 @@ const Signup = () => {
         return;
        } else { //위4가지 상황 아닐때 axios이용해서 데이터 보내주기
         try {
-          await axios.post("https://a358bdec-994d-43d3-9c5d-094e23523748.mock.pstmn.io",{
+          await axios.post("https://a358bdec-994d-43d3-9c5d-094e23523748.mock.pstmn.io/api/user",{
             member : inputs.userId,
             nickname : inputs.nickname,
             password : inputs.password
