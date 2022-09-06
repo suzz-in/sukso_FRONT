@@ -14,6 +14,7 @@ const Detail = () => {
     dispatch(getLikeCount());
     console.log(dispatch(getLikeCount()));
   }, []);
+
   const heartClick = () => {
     if (likecount.liked) {
       dispatch(postLikeCount({ count: likecount.count - 1, liked: false }));

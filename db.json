@@ -1,4 +1,48 @@
 {
+  "postList": [
+    {
+      "success": true,
+      "data": [
+        {
+          "postId": 1,
+          "title": "title1",
+          "heartNum": 0,
+          "heartOn": false
+        },
+        {
+          "postId": 2,
+          "title": "title2",
+          "heartNum": 0,
+          "heartOn": false
+        },
+        {
+          "postId": 3,
+          "title": "title3",
+          "heartNum": 0,
+          "heartOn": false
+        },
+        {
+          "postId": 4,
+          "title": "title4",
+          "heartNum": 0,
+          "heartOn": false
+        },
+        {
+          "postId": 5,
+          "title": "title5",
+          "heartNum": 0,
+          "heartOn": false
+        },
+        {
+          "postId": 6,
+          "title": "title6",
+          "heartNum": 0,
+          "heartOn": false
+        }
+      ],
+      "error": null
+    }
+  ],
   "commentList": [
     {
       "id": "2930416d-55a2-4026-94dd-06ab3912740d",
