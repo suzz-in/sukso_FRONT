@@ -1,20 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../components/Main";
-import Detail from "../components/Detail";
-import Login from "../components/Login";
-import Signup from "../components/Singup";
-import Header from "../components/Header";
+import LoginPage from "../page/LoginPage";
+import MainPage from "../page/MainPage";
+import SingupPage from "../page/SignupPage";
+import DetailPage from "../page/Detailpage";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/main" element={<Main />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SingupPage />} />
+        <Route path="/post" element={<MainPage />} />
+        <Route path="/detail" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );
