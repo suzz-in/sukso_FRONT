@@ -46,18 +46,18 @@ const Comment = () => {
     <Container>
       {commentList.map((comment) => {
         return (
-          <CommentListContainer key={comment.id}>
+          <CommentListContainer key={comment.commentId}>
             <CommentUserName>{comment.userName}</CommentUserName>
-            {updateInput && updateId === comment.id ? (
+            {updateInput && updateId === comment.commentId ? (
               <input
                 type="text"
-                defaultValue={comment.comment}
+                defaultValue={comment.content}
                 ref={patchInput}
               />
             ) : (
-              <Commentcontent>{comment.comment}</Commentcontent>
+              <Commentcontent>{comment.content}</Commentcontent>
             )}
-            {updateInput && updateId === comment.id ? (
+            {updateInput && updateId === comment.commentId ? (
               <IconButton
                 onClick={() => {
                   const patchValue = patchInput.current.value;
@@ -70,14 +70,14 @@ const Comment = () => {
               <div>
                 <IconButton
                   onClick={() => {
-                    setUpInput(comment.id);
+                    setUpInput(comment.commentId);
                   }}
                 >
                   <BsPencil size="15" color="white" /> {/* 수정버튼 */}
                 </IconButton>
                 <IconButton
                   onClick={() => {
-                    DeleteComment(comment.id); // 삭제할 id 넘겨주기
+                    DeleteComment(comment.commentId); // 삭제할 id 넘겨주기
                   }}
                 >
                   <BsTrash size="15" color="white" /> {/* 삭제버튼 */}

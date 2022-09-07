@@ -11,8 +11,8 @@ const Input = () => {
   // 댓글 추가
   const AddComment = () => {
     const data = {
-      id: uuidv4(),
-      comment: comment.current.value,
+      commentId: uuidv4(),
+      content: comment.current.value,
     };
     if (comment.current.value < 1) {
       alert("내용을 입력해 주세요");

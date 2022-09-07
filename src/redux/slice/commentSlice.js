@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getCommentList = createAsyncThunk("get/commentList", async () => {
-  const { data } = await axios.get("http://localhost:3001/commentList");
+  const { data } = await axios.get("http://localhost:3001/comment");
   return data;
 });
 
@@ -10,7 +10,7 @@ export const addCommentList = createAsyncThunk(
   "add/commentList",
   async (newComment) => {
     const { data } = await axios.post(
-      "http://localhost:3001/commentList",
+      "http://localhost:3001/comment",
       newComment
     );
     return data;
@@ -18,9 +18,7 @@ export const addCommentList = createAsyncThunk(
 );
 
 export const deleteComment = createAsyncThunk("delete/comment", async (id) => {
-  const { data } = await axios.delete(
-    `http://localhost:3001/commentList/${id}`
-  );
+  const { data } = await axios.delete(`http://localhost:3001/comment/${id}`);
   return data;
 });
 
@@ -28,8 +26,8 @@ export const updateComment = createAsyncThunk(
   "update/comment",
   async (updateData) => {
     const { data } = await axios.patch(
-      `http://localhost:3001/commentList/${updateData.comment.id}`,
-      { comment: updateData.patchValue }
+      `http://localhost:3001/comment/${updateData.comment.commentId}`,
+      { content: updateData.patchValue }
     );
 
     return data;
