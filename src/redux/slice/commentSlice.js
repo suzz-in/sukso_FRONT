@@ -10,7 +10,7 @@ export const addCommentList = createAsyncThunk(
   "add/commentList",
   async (newComment) => {
     const { data } = await axios.post(
-      "http://localhost:3001/comment",
+      "http://localhost:3001/commentList",
       newComment
     );
     return data;
@@ -18,7 +18,9 @@ export const addCommentList = createAsyncThunk(
 );
 
 export const deleteComment = createAsyncThunk("delete/comment", async (id) => {
-  const { data } = await axios.delete(`http://localhost:3001/comment/${id}`);
+  const { data } = await axios.delete(
+    `http://localhost:3001/commentList/${id}`
+  );
   return data;
 });
 
@@ -26,7 +28,7 @@ export const updateComment = createAsyncThunk(
   "update/comment",
   async (updateData) => {
     const { data } = await axios.patch(
-      `http://localhost:3001/comment/${updateData.comment.id}`,
+      `http://localhost:3001/commentList/${updateData.comment.id}`,
       { comment: updateData.patchValue }
     );
 
@@ -39,21 +41,7 @@ const initialState = { comment: [] };
 const commentSlice = createSlice({
   name: "comment",
   initialState,
-  reducers: {
-    // deleteSetComment: (state, action) => {
-    //   state.comment = state.comment.filter(
-    //     (comment) => comment.id !== action.payload
-    //   );
-    // },
-    // updateSetComment: (state, action) => {
-    //   state.comment.map((item) => {
-    //     if (item.id == action.payload.comment.id) {
-    //       item.comment = action.payload.patchValue;
-    //     }
-    //     return item;
-    //   });
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getCommentList.fulfilled, (state, action) => {
       state.comment = action.payload;
