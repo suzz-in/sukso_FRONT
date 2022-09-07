@@ -3,6 +3,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { API } from "../api";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -10,13 +11,13 @@ const Signup = () => {
 
   const [inputs, setInputs] = useState({
     //보내줄때는 member,nickname,password 로 보내주자
-    userId: "",
+    member: "",
     nickname: "",
     password: "",
     passwordConfirm: "",
   });
 
-  const { userId, nickname, password, passwordConfirm } = inputs;
+  const { member, nickname, password, passwordConfirm } = inputs;
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
@@ -32,11 +33,11 @@ const Signup = () => {
     //최소8자 이상, 20자 이하  영 대문자, 영 소문자, 숫자, 특수문자 각각 최소 1개 이상
 
     //아이디충족x,비밀번호충족x,비번-비번확인 다를때,한칸이라도 입력안했을때
-    if (!reg1.test(userId)) {
+    if (!reg1.test(member)) {
       //reg1에 충족하지 않는(!) userid입력 시
       alert("아이디는 영문 대소문자와 숫자 5~12자리로 입력해야 합니다.");
       setInputs({
-        userId: "", //id는 빈값으로
+        member: "", //id는 빈값으로
       });
       return;
     }
@@ -60,7 +61,7 @@ const Signup = () => {
       return;
     } // 하나라도 입력 안했을 때
     if (
-      userId === "" ||
+      member === "" ||
       nickname === "" ||
       password === "" ||
       passwordConfirm === ""
@@ -70,12 +71,14 @@ const Signup = () => {
     } else {
       //위4가지 상황 아닐때 axios이용해서 데이터 보내주기
       try {
-        await axios.post(
-          "https://a358bdec-994d-43d3-9c5d-094e23523748.mock.pstmn.io/api/user",
+        await API.post(
+          "/member/signup",
+          // "https://a358bdec-994d-43d3-9c5d-094e23523748.mock.pstmn.io/api/user",
+          
           {
-            member: inputs.userId,
+            member: inputs.member,
             nickname: inputs.nickname,
-            password: inputs.password,
+            password: inputs.password
           }
         );
         setSubmitted(true); // useState로 전달
@@ -89,24 +92,23 @@ const Signup = () => {
   const twiceCheckHandler = (e) => {
     e.preventDefault();
     const memberCheck = {
-      userId: inputs.userId,
+      member: inputs.member,
     };
     console.log("체크체크", memberCheck);
   };
   if (submited === true) {
     console.log("회원가입 완!");
-    return navigate("/");
+    return navigate("/member/login");
   }
 
   return (
     <div>
-      <h3>회원가입</h3>
       <LoginContainer>
         <LoginLabel htmlFor="id">아이디 *</LoginLabel>
         <LoginInput
-          name="userId"
+          name="member"
           type="text"
-          value={userId}
+          value={member}
           onChange={onChangeHandler}
           placeholder="아이디를 입력해주세요"
         />
