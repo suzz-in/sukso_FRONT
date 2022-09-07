@@ -2,22 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getLikeCount = createAsyncThunk("get/likeCount", async () => {
-  const { data } = await axios.get("http://localhost:3001/likeList");
+  const { data } = await axios.get("http://localhost:3001/likeList/0");
   return data;
 });
 export const postLikeCount = createAsyncThunk(
   "post/likeCount",
   async (likedata) => {
-    const { data } = await axios.patch("http://localhost:3001/likeList", {
+    console.log(likedata);
+    const { data } = await axios.patch("http://localhost:3001/likeList/0", {
       liked: likedata.liked,
       count: likedata.count,
     });
-    console.log(data);
     return data;
   }
 );
 
-const initialState = { likeList: [] };
+const initialState = { likeList: {} };
 
 const likeSlice = createSlice({
   name: "like",

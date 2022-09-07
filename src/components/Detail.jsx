@@ -1,24 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Input from "../elements/Input";
 import Comment from "./Comment";
-import { getLikeCount, postLikeCount } from "../redux/slice/likeSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Detail = () => {
-  const dispatch = useDispatch();
-  const likecount = useSelector((state) => state.like.likeList);
+  const [postData, setPostData] = useState();
+  const params = useParams();
 
+  const getData = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3001/likeList/${params.id}`
+    );
+    setPostData(data);
+  };
   useEffect(() => {
-    dispatch(getLikeCount());
+    getData();
   }, []);
-
+  console.log(postData);
   const heartClick = () => {
-    if (likecount.liked) {
-      dispatch(postLikeCount({ count: likecount.count - 1, liked: false }));
+    // console.log(postData);
+    if (postData.liked) {
+      // dispatch(postpostData({ count: postData.count - 1, liked: false }));
+      setPostData((prevState) => {
+        return { ...prevState, liked: false, count: prevState.count - 1 };
+      });
     } else {
-      dispatch(postLikeCount({ count: likecount.count + 1, liked: true }));
+      // dispatch(postpostData({ count: postData.count + 1, liked: true }));
+      setPostData((prevState) => {
+        return { ...prevState, liked: true, count: prevState.count + 1 };
+      });
     }
   };
 
@@ -28,12 +41,12 @@ const Detail = () => {
       <div>
         <img src="https://i0.wp.com/blog.allstay.com/wp-content/uploads/2020/12/geoje-main.jpg?resize=740%2C444&ssl=1" />
         <HeartContainer onClick={heartClick}>
-          {likecount.liked ? (
+          {postData?.liked ? (
             <AiFillHeart color="red" size="30px" />
           ) : (
             <AiOutlineHeart color="red" size="30px" />
           )}
-          <HeartCount>{likecount.count}</HeartCount>
+          <HeartCount>{postData?.count}</HeartCount>
         </HeartContainer>
       </div>
       <Input />

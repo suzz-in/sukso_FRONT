@@ -1,46 +1,51 @@
 {
-  "postList": [
+  "post": [
     {
       "success": true,
       "data": [
         {
           "postId": 1,
           "title": "title1",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         },
         {
           "postId": 2,
           "title": "title2",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         },
         {
           "postId": 3,
           "title": "title3",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         },
         {
           "postId": 4,
           "title": "title4",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         },
         {
           "postId": 5,
           "title": "title5",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         },
         {
           "postId": 6,
           "title": "title6",
+          "imageUrl": "https://www.gajajeju.com/admin/sukso/new/roomImg/1655862899_room1.jpg",
           "heartNum": 0,
           "heartOn": false
         }
-      ],
-      "error": null
+      ]
     }
   ],
   "commentList": [
@@ -55,41 +60,10 @@
   ],
   "likeList": [
     {
+      "id": 0,
       "contentId": "0",
       "count": 0,
-      "liked": true
-    }
-  ],
-  "postLikeList": [
-    {
-      "success": true,
-      "postId": 1,
-      "error": null
-    },
-    {
-      "success": true,
-      "postId": 2,
-      "error": null
-    },
-    {
-      "success": true,
-      "postId": 3,
-      "error": null
-    },
-    {
-      "success": true,
-      "postId": 4,
-      "error": null
-    },
-    {
-      "success": true,
-      "postId": 5,
-      "error": null
-    },
-    {
-      "success": true,
-      "postId": 6,
-      "error": null
+      "liked": false
     }
   ]
 }
