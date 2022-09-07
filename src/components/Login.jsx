@@ -5,15 +5,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API } from "../api";
 
 const Login = () => {
-  const [id, setId] = useState("");
+  const [member, setMember] = useState("");
   const [password, setPassword] = useState("");
   const [submited, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const onChange1 = (e) => {
-    setId(e.target.value);
+    setMember(e.target.value);
   };
 
   const onChange2 = (e) => {
@@ -27,10 +28,10 @@ const Login = () => {
     let reg2 =
       /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,20}$/;
     //최소8자 이상, 20자 이하  영 대문자, 영 소문자, 숫자, 특수문자 각각 최소 1개 이상
-    if (id === "" || password === "") {
+    if (member === "" || password === "") {
       alert("아이디와 비밀번호를 정확히 입력해주세요");
     }
-    if (!reg1.test(id)) {
+    if (!reg1.test(member)) {
       alert("아이디는 영문 대소문자와 숫자 5~12자리로 입력해야 합니다.");
     }
     if (!reg2.test(password)) {
@@ -39,10 +40,10 @@ const Login = () => {
       );
     }
     try {
-      const response = await axios.post(
-        "login",
+      const response = await API.post(
+        "/member/login",
         {
-          id: id,
+          member: member,
           password: password,
         },
         { withCredentials: true }
@@ -53,7 +54,7 @@ const Login = () => {
         response.data.data["Refresh-Token"]
       );
       setSubmitted(true);
-      navigate("/");
+      navigate("/member/login");
     } catch (error) {
       alert("아이디와 비밀번호를 확인해주세요.");
 
@@ -71,7 +72,7 @@ const Login = () => {
       <LoginContainer>
         <label htmlFor="id"></label>
         <LoginInput
-          value={id}
+          value={member}
           onChange={onChange1}
           type="text"
           placeholder="아이디"
@@ -89,7 +90,7 @@ const Login = () => {
           로그인
         </LoginButton>
         
-          <LoginButton><Link to="/signup">회원가입</Link></LoginButton>
+          <LoginButton><Link to="/member/signup">회원가입</Link></LoginButton>
         
       </LoginContainer>
     </div>
