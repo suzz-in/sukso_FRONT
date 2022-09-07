@@ -1,61 +1,85 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { getPostList } from "../redux/slice/postSlice";
-import { getPostLike } from "../redux/slice/postLikeSlice";
-import { useDispatch, useSelector } from "react-redux";
+// import { getPostList } from "../redux/slice/postSlice";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Main() {
-  const postList = useSelector((state) => state?.post.post);
-  console.log(postList);
-  const dispatch = useDispatch();
+  const [postList, setPostList] = useState([]);
+  const [postHeart, setPostHeart] = useState(false);
+
+  const getPostList = async () => {
+    const { data } = await axios.get("http://localhost:3001/post");
+    //15.165.76.244/
+    setPostList(data);
+  };
+
+  const heartClicked = async (payload) => {
+    const { data } = await axios.patch(
+      `http://localhost:3001/post/${payload.postId}`,
+      { heartOn: !payload.heartOn }
+    );
+    return data;
+  };
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPostList());
+    getPostList();
   }, []);
 
   const goDetailButton = (postId) => {
     navigate(`/detail/${postId}`);
   };
-  const likeToggleButton = (postId) => {
-    dispatch(getPostLike(postId));
-  };
 
+  const likeToggleButton = (post) => {
+    console.log(post);
+    if (post.heartOn) {
+      setPostHeart(false);
+    } else {
+      setPostHeart(true);
+    }
+  };
   return (
     <ContanDiv>
       {/* postList값 true인 경우 map이 실행되도록 설정  */}
-      {postList &&
-        postList.map((post) => {
-          console.log(postList);
-          return (
-            <Stdiv key={post.postId}>
-              <Stimg src={post.imageUrl} />
-              <HeartContainer
-                onClick={() => {
-                  likeToggleButton(post.postId);
-                }}
-              >
-                {post.heartOn ? (
-                  <AiFillHeart color="red" size="30px" />
-                ) : (
-                  <AiOutlineHeart color="red" size="30px" />
-                )}
+      {postList?.map((post) => {
+        return (
+          <Stdiv key={post.postId}>
+            <Stimg src={post.imageUrl} />
+            <HeartContainer
+              onClick={() => {
+                likeToggleButton(post);
+              }}
+            >
+              {postHeart ? (
+                <AiFillHeart
+                  onClick={() => heartClicked(post)}
+                  color="red"
+                  size="30px"
+                />
+              ) : (
+                <AiOutlineHeart
+                  onClick={() => heartClicked(post)}
+                  color="red"
+                  size="30px"
+                />
+              )}
 
-                <HeartCount>{post.heartNum}</HeartCount>
-              </HeartContainer>
-              <h3> {post.title}</h3>
-              <button
-                onClick={() => {
-                  goDetailButton(post.postId);
-                }}
-              >
-                상세보기
-              </button>
-            </Stdiv>
-          );
-        })}
+              <HeartCount>{post.heartNum}</HeartCount>
+            </HeartContainer>
+            <h3> {post.title}</h3>
+            <button
+              onClick={() => {
+                goDetailButton(post.postId);
+              }}
+            >
+              상세보기
+            </button>
+          </Stdiv>
+        );
+      })}
     </ContanDiv>
   );
 }
