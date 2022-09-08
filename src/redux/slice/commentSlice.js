@@ -1,32 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { token } from "../../api";
 
 export const getCommentList = createAsyncThunk("get/commentList", async () => {
-  const { data } = await axios.get("http://localhost:3001/comment");
+  const { data } = await token.get("/comment");
   return data;
 });
 
 export const addCommentList = createAsyncThunk(
   "add/commentList",
   async (newComment) => {
-    const { data } = await axios.post(
-      "http://localhost:3001/comment",
-      newComment
-    );
+    const { data } = await token.post("/comment", newComment);
     return data;
   }
 );
 
 export const deleteComment = createAsyncThunk("delete/comment", async (id) => {
-  const { data } = await axios.delete(`http://localhost:3001/comment/${id}`);
+  const { data } = await token.delete(`/comment/${id}`);
   return data;
 });
 
 export const updateComment = createAsyncThunk(
   "update/comment",
   async (updateData) => {
-    const { data } = await axios.patch(
-      `http://localhost:3001/comment/${updateData.comment.commentId}`,
+    const { data } = await token.post(
+      `/comment/${updateData.comment.commentId}`,
       { content: updateData.patchValue }
     );
 

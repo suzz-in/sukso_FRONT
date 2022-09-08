@@ -10,7 +10,7 @@ function Main() {
   const [postList, setPostList] = useState([]);
 
   const getPostList = async () => {
-    const { data } = await token.get("/post");
+    const { data } = await axios.get("http://15.165.76.244/post");
     //15.165.76.244/
     setPostList(data.data);
   };
