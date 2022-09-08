@@ -46,12 +46,12 @@ const Login = () => {
           member: member,
           password: password,
         },
-        { withCredentials: true }
+        // { withCredentials: true }
       ); //수동으로 CORS 요청에 쿠기값 넣어줌
-      localStorage.setItem("Authorization", response.data.data.Authorization);
+      localStorage.setItem("Authorization", response.headers["Access-Token"]);
       localStorage.setItem(
         "Refresh-Token",
-        response.data.data["Refresh-Token"]
+        response.headers["Refresh-Token"]
       );
       setSubmitted(true);
       navigate("/member/login");
@@ -63,7 +63,7 @@ const Login = () => {
   };
   useEffect(() => {
     if (localStorage.getItem("Authorization") !== null) {
-      return navigate("/");
+      return navigate("/post");
     }
   }, []);
 
