@@ -10,6 +10,10 @@ export const API = axios.create({
   },
   withCredentials: true,
 });
+export const token = axios.create({
+  baseURL: "http://15.165.76.244",
+  headers: { "X-AUTH-TOKEN": localStorage.getItem("Access-Token") },
+});
 
 // const refresh = false;
 // axios.interceptors.response.use(
