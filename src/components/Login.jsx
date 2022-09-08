@@ -48,13 +48,13 @@ const Login = () => {
         },
         // { withCredentials: true }
       ); //수동으로 CORS 요청에 쿠기값 넣어줌
-      localStorage.setItem("Authorization", response.headers["Access-Token"]);
+      localStorage.setItem("access-token", response.headers["access-token"]);
       localStorage.setItem(
-        "Refresh-Token",
-        response.headers["Refresh-Token"]
+        "refresh-token",
+        response.headers["refresh-token"]
       );
       setSubmitted(true);
-      navigate("/member/login");
+      navigate("/post");
     } catch (error) {
       alert("아이디와 비밀번호를 확인해주세요.");
 
@@ -62,8 +62,10 @@ const Login = () => {
     }
   };
   useEffect(() => {
-    if (localStorage.getItem("Authorization") !== null) {
-      return navigate("/post");
+    console.log("token", localStorage.getItem("access-token"))
+    if (localStorage.getItem("access-token") !== null) {
+      
+       navigate("/post");
     }
   }, []);
 
