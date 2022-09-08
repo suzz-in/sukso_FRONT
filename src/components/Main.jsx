@@ -4,23 +4,36 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 // import { getPostList } from "../redux/slice/postSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { token } from "../api/index";
 
 function Main() {
   const [postList, setPostList] = useState([]);
-  const [postHeart, setPostHeart] = useState(false);
 
   const getPostList = async () => {
-    const { data } = await axios.get("http://localhost:3001/post");
+    const { data } = await token.get("/post");
     //15.165.76.244/
-    setPostList(data);
+    setPostList(data.data);
   };
 
-  const heartClicked = async (payload) => {
-    const { data } = await axios.patch(
-      `http://localhost:3001/post/${payload.postId}`,
-      { heartOn: !payload.heartOn }
-    );
-    return data;
+  const heartClicked = async (postId) => {
+    const idx = postList.findIndex((post) => post.id === postId);
+    console.log(idx);
+    const { data } = await token.post(`/heart/post/${postId}`, {
+      heartOn: !postList[idx].heartOn,
+    });
+    if (data.success) {
+      setPostList(
+        postList.map((item) =>
+          item.id === idx
+            ? {
+                ...item,
+                heartNum: item.heartOn ? item.heartNum - 1 : item.heartNum + 1,
+                heartOn: !item.heartOn,
+              }
+            : item
+        )
+      );
+    }
   };
 
   const navigate = useNavigate();
@@ -33,43 +46,27 @@ function Main() {
     navigate(`/detail/${postId}`);
   };
 
-  const likeToggleButton = (post) => {
-    console.log(post);
-    if (post.heartOn) {
-      setPostHeart(false);
-    } else {
-      setPostHeart(true);
-    }
-  };
   return (
     <ContanDiv>
       {/* postList값 true인 경우 map이 실행되도록 설정  */}
       {postList?.map((post) => {
         return (
-          <Stdiv key={post.postId}>
-            <Stimg src={post.imageUrl} />
+          <Stdiv key={post.id}>
+            <Stimg src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA1MDlfMjg4%2FMDAxNjIwNTU5MzkzOTMw.eeWcSZEPFXvv0Q7ocsPzII0BcdGuSoafVegAU_cdvL0g.JGILoEqkOTx56sAE2M8KF9mcLaR6DIImsPARAOiJ8_wg.JPEG.tkdbsdhkdwk%2FIMG_4522.jpg&type=sc960_832" />
             <HeartContainer
               onClick={() => {
-                likeToggleButton(post);
+                heartClicked(post.id);
               }}
             >
-              {postHeart ? (
-                <AiFillHeart
-                  onClick={() => heartClicked(post)}
-                  color="red"
-                  size="30px"
-                />
+              {post.heartOn ? (
+                <AiFillHeart color="red" size="30px" />
               ) : (
-                <AiOutlineHeart
-                  onClick={() => heartClicked(post)}
-                  color="red"
-                  size="30px"
-                />
+                <AiOutlineHeart color="red" size="30px" />
               )}
 
               <HeartCount>{post.heartNum}</HeartCount>
             </HeartContainer>
-            <h3> {post.title}</h3>
+            <h3> 사인웨이브</h3>
             <button
               onClick={() => {
                 goDetailButton(post.postId);
