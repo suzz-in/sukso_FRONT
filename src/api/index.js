@@ -12,7 +12,7 @@ export const API = axios.create({
 });
 export const token = axios.create({
   baseURL: "http://15.165.76.244",
-  headers: { "X-AUTH-TOKEN": localStorage.getItem("Access-Token") },
+  headers: { "access-token": localStorage.getItem("access-token") },
 });
 
 // const refresh = false;
